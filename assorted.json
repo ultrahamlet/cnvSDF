@@ -1,0 +1,145 @@
+{
+	"primitives": [
+		[
+			"pEllipsoid",
+			"Vector3( 1, 0.5, 0.2 )"
+		],
+		[
+			"pCone",
+			30,
+			1
+		],
+		[
+			"pCylinder",
+			1,
+			1
+		],
+		[
+			"pEllipsoid",
+			"Vector3( 1, 0.5, 0.2 )"
+		],
+		[
+			"pBox",
+			"Vector3( 1, 1, 1 )"
+		],
+		[
+			"pEllipsoid",
+			"Vector3( 1, 0.9, 0.5 )"
+		]
+	],
+	"modifiers": [
+		[
+			"mTranslation",
+			[
+				[
+					"ref",
+					2
+				],
+				[
+					"mTranslation",
+					[
+						[
+							"ref",
+							3
+						]
+					],
+					"Vector3( 0, 1, 0 )"
+				],
+				[
+					"mTranslation",
+					[
+						[
+							"ref",
+							1
+						],
+						[
+							"mRotation",
+							[
+								[
+									"ref",
+									0
+								]
+							],
+							"Vector3( 0, 0, 45 )"
+						]
+					],
+					"Vector3( 2, 0, 0 )"
+				]
+			],
+			"Vector3( -1.5, 0, 0 )"
+		],
+		[
+			"mTranslation",
+			[
+				[
+					"mRotation",
+					[
+						[
+							"ref",
+							4
+						]
+					],
+					"Vector3( 10, 30, 15 )"
+				]
+			],
+			"Vector3( -4.2, 0, 0 )"
+		],
+		[
+			"mTranslation",
+			[
+				[
+					"ref",
+					5
+				]
+			],
+			"Vector3( -4.5, 2, 0 )"
+		]
+	],
+	"operator_tree": [
+		"oUnion",
+		[
+			[
+				"oSmoothUnion",
+				[
+					[
+						"ref",
+						1
+					],
+					[
+						"ref",
+						0
+					]
+				],
+				0.1
+			],
+			[
+				"oSmoothSubtraction",
+				[
+					[
+						"ref",
+						2
+					],
+					[
+						"ref",
+						3
+					]
+				],
+				0.1
+			],
+			[
+				"oSmoothUnion",
+				[
+					[
+						"ref",
+						5
+					],
+					[
+						"ref",
+						4
+					]
+				],
+				0.8
+			]
+		]
+	]
+}
