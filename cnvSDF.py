@@ -1,7 +1,25 @@
 import json
-from scipy.spatial.transform import Rotation
+#from scipy.spatial.transform import Rotation
 import numpy as np
 
+def rotate_xyz(degx,degy,degz):
+    # degree to radian
+    r = np.radians(degx)
+    cr = np.cos(r)
+    sr = np.sin(r)
+    r = np.radians(degy)
+    cp = np.cos(r)
+    sp = np.sin(r)
+    r = np.radians(degz)
+    cy = np.cos(r)
+    sy = np.sin(r)
+
+    R_xyz = np.matrix((
+        (cy*cp, cy*sp*sr-sy*cr, cy*sp*cr+sy*sr),
+        (sy*cp, sy*sp*sr+cy*cr, sy*sp*cr-cy*sr),
+        (-sp, cp*sr, cp*cr)
+    ))
+    return R_xyz
 def hierarchy(mf):
     global gcount
     global pcount
@@ -228,10 +246,20 @@ def hierarchy(mf):
                 v1 = -float(u[1])
                 v2 = -float(u[2])
                 
-                rotvec = np.array([np.radians(v0), np.radians(v1), np.radians(v2)])
-                rot = Rotation.from_rotvec(rotvec)
                 
-                e = np.linalg.inv(rot.as_matrix()) #inverse matrix
+                #rotvec = np.array([np.radians(v0), np.radians(v1), np.radians(v2)])
+                #euler = np.array([np.radians(v0), np.radians(v1), np.radians(v2)])
+                #rotvec = Rotation.from_euler('XYZ', euler, degrees=True)
+                #rotvec = np.e([np.radians(v0), np.radians(v1), np.radians(v2)])
+
+                #if v1 == 90. and v2 == 90.:
+                #     rotvec = np.array([0.0, 0.0, 1.0])
+
+                #print('---------------- ', v0,v1,v2)
+                #rot = Rotation.from_rotvec(rotvec)
+                rot = rotate_xyz(v0,v1,v2)
+                
+                e = np.linalg.inv(rot) #inverse matrix
                 # for output mat3
                 strm = str(e)
                 strm = strm.replace('[[' ,'mat3(')
