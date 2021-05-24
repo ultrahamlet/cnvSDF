@@ -158,6 +158,15 @@ def hierarchy(mf):
                 for pm in prm:
                     print(pm)
             #------------------------------------------------------
+            if(mf[0] == 'mElongation'):
+                    spos = mf[2].replace('Vector3(','')
+                    spos = spos.replace(')','')
+                    sval = spos.split(',')
+                    spos = 'vec3(' + str(float(sval[0]))  + ' ,' + str(float(sval[1])) + ' ,' + str(float(sval[2])) + ');'
+                    hd = 'vec3 ElEl_'+ str(gcount)
+                    print(hd,' = ',spos)
+                    gcount += 1   
+
             if(mf[0] == 'mRepLim'):
                     #print(mf,'-- ',mf[3])
                     spos = mf[2].replace('Vector3(','')
