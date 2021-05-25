@@ -1,6 +1,6 @@
 # cnvSDF.py
 
-***cnvSDF.py*** converts output of jitech's "SDF Editor https://joetech.itch.io/sdf-editor  
+***cnvSDF.py*** converts output of jitech's "SDF Editor" https://joetech.itch.io/sdf-editor  
 to Shadertoy, GLSL code.  
 
 It handle **Primitives**  
@@ -17,8 +17,35 @@ and **Modifieres**
   
 and **Operators**  
   
-  Union, Subtraction, Interection, Onion, Thicken, SmoothUnion, SmoothSubtraction, SumoothIntersection
+  Union, Subtraction, Interection, Onion, Thicken, SmoothUnion, SmoothSubtraction, SumoothIntersection  
+    
+***How to use?***
   
+   Model SDF objects with "SDF Editor".  
+   
+   Save data as "test.json" which is defalut file name.  
+   
+   Copy sdf function from output pane of "SDF Editor" and paste it to viewSDF.flag.  
+   
+   Run cnvSDF.py, and copy output lines to head of  viewSDF.flag. 
+   
+   Open viewSDF.flag with Visual Studio Code with Shadertoy pulugin.
+   
+   Mouse right button-> Shadertoy:Show GLSL Preview
+   
+   That's it!
+   
+   If you want upload it to web,  
+     
+   Mouse right button-> Shadertoy:Create Protbale GLSL Preview  
+     
+   You got viewSDF.html.
+   
+   Just upload it!
+   
+   
+   
+   
   
   
 
