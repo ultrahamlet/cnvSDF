@@ -25,7 +25,7 @@ and **Operators**
    
    ***2.*** Save data as "test.json" which is defalut file name.  
      
-   ***3.*** Find "sdf" in Visual Studio Code, and og to line of sdf(vec3 p0)  
+   ***3.*** Find "sdf" in Visual Studio Code, and go to line of sdf(vec3 p0) {...}
    
    ***4.*** Copy sdf function from output pane of "SDF Editor" and replace lines of viewSDF.flag.  
    
