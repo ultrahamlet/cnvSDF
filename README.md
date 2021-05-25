@@ -24,8 +24,10 @@ and **Operators**
    Model SDF objects with "SDF Editor".  
    
    Save data as "test.json" which is defalut file name.  
+     
+   Find "sdf" in Visual Studio Code, and og to line of sdf(vec3 p0)  
    
-   Copy sdf function from output pane of "SDF Editor" and paste it to viewSDF.flag.  
+   Copy sdf function from output pane of "SDF Editor" and replace lines of viewSDF.flag.  
    
    Run cnvSDF.py, and copy output lines to head of  viewSDF.flag. 
    
