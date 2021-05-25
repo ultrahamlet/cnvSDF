@@ -31,6 +31,8 @@ and **Operators**
    
    Run cnvSDF.py, and copy output lines to head of  viewSDF.flag. 
    
+   Close all files of Visual Studio Code.
+   
    Open viewSDF.flag with Visual Studio Code with Shadertoy pulugin.
    
    Mouse right button-> Shadertoy:Show GLSL Preview
