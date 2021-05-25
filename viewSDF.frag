@@ -1,63 +1,16 @@
-//
+
 // Adapted from original shader: https://www.shadertoy.com/view/ldcyW4
 // modeled by https://joetech.itch.io/sdf-editor
-// converted by cnvSDF3
+// converted by cnvSDF
 
-//
-mat3 RoIn_1 = mat3( 1.,0.,0.,0.,0.81915204,-0.57357644,0.,0.57357644,0.81915204);
-vec3 TrIn_2 = vec3(-0.0 ,-0.0 ,-0.0);
-float ToRa_3 = 1.0;
-float ToRa_4 = 0.25;
-vec3 TrIn_5 = vec3(-0.0 ,4.0 ,-0.0);
-vec3 PlNo_6 = vec3( 0, 1, 0 );
-float PlDi_7 = 0.0;
-float LiLe_8 = 1.;
-float LiRa_9 = 1.0;
-float LiRa_10 = 0.25;
 //----------------------------------------------------------------
-vec3 TrIn_1 = vec3(1.5 ,-0.0 ,-0.0);
-float CyRa_2 = 1.0;
-float CyHe_3 = 1.0;
-vec3 TrIn_4 = vec3(-0.0 ,-1.0 ,-0.0);
-vec3 ElRa_5 = vec3( 1, 0.5, 0.2 );
-vec3 TrIn_6 = vec3(-2.0 ,-0.0 ,-0.0);
-vec2 CoGe_7 = vec2(30.0 ,30.0);
-float CoHe_8 = 1.0;
-mat3 RoIn_9 = mat3( 0.70710678,-0.70710678,0.,0.70710678,0.70710678,0.,0.,0.,1.);
-vec3 ElRa_10 = vec3( 1, 0.5, 0.2 );
-vec3 TrIn_11 = vec3(4.2 ,-0.0 ,-0.0);
-mat3 RoIn_12 = mat3( 0.86550523,-0.1797403,0.47112159,0.23191143,0.97138674,-0.05353717,-0.44801848,0.13474938,0.76420172);
-vec3 BoSi_13 = vec3( 1, 1, 1 );
-vec3 TrIn_14 = vec3(4.5 ,-2.0 ,-0.0);
-vec3 ElRa_15 = vec3( 1, 0.9, 0.5 );
-float SmTr_16 = 0.1;
-float SmTr_17 = 0.1;
-float SmTr_18 = 0.8;
+vec3 BoSi_1 = vec3(1.0 ,1.0 ,1.0);
 //----------------------------------------------------------------
 const float epsilon = 0.01;
 const float pi = 3.14159265359;
 const float halfpi = 1.57079632679;
 const float twopi = 6.28318530718;
 
-// rotate
-vec3 rotate(vec3 p, float angle, vec3 axis){
-    vec3 a = normalize(axis);
-    float s = sin(angle);
-    float c = cos(angle);
-    float r = 1.0 - c;
-    mat3 m = mat3(
-        a.x * a.x * r + c,
-        a.y * a.x * r + a.z * s,
-        a.z * a.x * r - a.y * s,
-        a.x * a.y * r - a.z * s,
-        a.y * a.y * r + c,
-        a.z * a.y * r + a.x * s,
-        a.x * a.z * r + a.y * s,
-        a.y * a.z * r - a.x * s,
-        a.z * a.z * r + c
-    );
-    return m * p;
-}
 
 mat3 rotateMat(vec3 p, float angle, vec3 axis){
     vec3 a = normalize(axis);
@@ -80,6 +33,9 @@ mat3 rotateMat(vec3 p, float angle, vec3 axis){
 
 #define LIGHT normalize(vec3(1.0, 1.0, 0.0))
 
+float displacement(vec3 p){
+    return sin(20.141592*p.x)*sin(0.141592*p.y)*sin(20.131592*p.y);
+}
 
 //----------------------------------------------------------------------------------
 float pSphere(float r, vec3 p)
@@ -248,6 +204,8 @@ float pOctahedron(float s, vec3 p)
     // return (p.x+p.y+p.z-s)*0.57735027;
 }
 
+
+
 float pPyramid(float h, vec3 p)
 {
     float m2 = h*h + 0.25;
@@ -345,27 +303,7 @@ float oSmoothIntersection(float k, float d1, float d2)
 }
 //-----------------------------------------------------------------
 
-float sdf(vec3 p0)
-{
-	float d1;
-	float d2;
-	float d3;
 
-	{
-		vec3 p1 = mRotation(RoIn_1, p0);
-		{
-			vec3 p2 = mTranslation(TrIn_2, p1);
-			d1 = pTorus(ToRa_3, ToRa_4, p2);
-		}
-	}
-	{
-		vec3 p1 = mTranslation(TrIn_5, p0);
-		d2 = pPlane(PlNo_6, PlDi_7, p1);
-	}
-	d3 = pLink(LiLe_8, LiRa_9, LiRa_10, p0);
-	return oUnion(d1, oUnion(d2, d3));
-}
-//-------------------------------------------------------------
 //Distance Field function by iq :
 //http://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 float sdSphere(vec3 p, float s)
@@ -416,8 +354,15 @@ vec3 TransformPosition(vec3 pos)
     
     return pos;
 }
+//////////////////////////////////////////////////////////////////////////////
+float sdf(vec3 p0)
+{
+	float d1;
 
-
+	d1 = pBox(BoSi_1, p0);
+	return d1;
+}
+//////////////////////////////////////////////////////////////////////////////
 vec3 RayMarch(vec3 rayDir, vec3 cameraOrigin)
 {
     const int maxItter = 128;
@@ -520,7 +465,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     {
         cameraOrigin.x = sin(iTime*0.25 + 2.0) * (6.0 + sin(iTime * 0.1));
         cameraOrigin.y = sin(iTime*0.3) - 0.5;
-        cameraOrigin.z = cos(iTime*0.25 + 2.0) * (6.0 + sin(iTime * 0.15)) ; 
+        cameraOrigin.z = cos(iTime*0.25 + 2.0) * (6.0 + sin(iTime * 0.15)) - 10. ; 
     }
     
     vec3 cameraTarget = vec3(0.0, 0.25, -1.0);

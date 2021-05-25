@@ -1,4 +1,5 @@
 import json
+from os import P_OVERLAY
 #from scipy.spatial.transform import Rotation
 import numpy as np
 
@@ -171,7 +172,19 @@ def hierarchy(mf):
                     val = str(float(prVal))
                     prm.append('float PyHe_' + str(gcount) + ' = ' + val + ';')
                     gcount += 1
-               
+                if prHead == 'pInfCylinder':
+                    val = str(float(prVal))
+                    prm.append('float InRa_' + str(gcount) + ' = ' + val + ';')
+                    gcount += 1
+                if prHead == 'pInfCone':
+                    rd = np.radians(float(str(prVal)))
+                    si = np.sin(rd)
+                    co = np.cos(rd)
+                    #print('====== ',prVal)
+                   
+                    prm.append('vec2 InGe_' + str(gcount) + ' = vec2(' + str(si) + ', ' + str(co) + ');')
+                    gcount += 1
+
 
                 for pm in prm:
                     print(pm)
