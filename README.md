@@ -23,25 +23,25 @@ and **Operators**
   
    ***1.*** Model SDF objects with "SDF Editor".  
    
-   Save data as "test.json" which is defalut file name.  
+   ***2.*** Save data as "test.json" which is defalut file name.  
      
-   Find "sdf" in Visual Studio Code, and og to line of sdf(vec3 p0)  
+   ***3.*** Find "sdf" in Visual Studio Code, and og to line of sdf(vec3 p0)  
    
-   Copy sdf function from output pane of "SDF Editor" and replace lines of viewSDF.flag.  
+   ***4.*** Copy sdf function from output pane of "SDF Editor" and replace lines of viewSDF.flag.  
    
-   Run cnvSDF.py, and copy output lines to head of  viewSDF.flag. 
+   ***5.*** Run cnvSDF.py, and copy output lines to head of  viewSDF.flag. 
    
-   Close all files of Visual Studio Code.
+   ***6.*** Close all files of Visual Studio Code.
    
-   Open viewSDF.flag with Visual Studio Code with Shadertoy pulugin.
+   ***7.*** Open viewSDF.flag with Visual Studio Code with Shadertoy pulugin.
    
-   Mouse right button-> Shadertoy:Show GLSL Preview
+   ***8.*** Mouse right button-> Shadertoy:Show GLSL Preview
    
    That's it!
    
    If you want upload it to web,  
      
-   Mouse right button-> Shadertoy:Create Protbale GLSL Preview  
+   ***9.*** Mouse right button-> Shadertoy:Create Protbale GLSL Preview  
      
    You got viewSDF.html.
    
