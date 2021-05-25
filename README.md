@@ -21,7 +21,7 @@ and **Operators**
     
 ***How to use?***
   
-   Model SDF objects with "SDF Editor".  
+   ***1.*** Model SDF objects with "SDF Editor".  
    
    Save data as "test.json" which is defalut file name.  
      
