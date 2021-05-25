@@ -321,7 +321,7 @@ pcount = 0
 #
 #  main    
 # read json file
-f = open('sample.json', 'r')
+f = open('test.json', 'r')
 json_dict = json.load(f)
 prim = json_dict['primitives']
 modi = json_dict['modifiers']
