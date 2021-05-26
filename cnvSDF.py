@@ -32,7 +32,6 @@ def hierarchy(mf):
                 prVal  = prim[mf[1]][1]
 
                 
-
                 if(prHead == 'pEllipsoid'):
                     spos = prVal.replace('Vector3(','')
                     spos = spos.replace(')','')
@@ -301,8 +300,9 @@ def hierarchy(mf):
 # analyze operator_tree
 def hierarchy2(mf):
     global gcount
-    if len(mf) > 1:
-        if not isinstance(mf[0], list):
+    #if len(mf) > 1:
+    if isinstance(mf, list):
+        if not isinstance(mf[0], list): # mf[0] is Operator
                 #print('===',mf)
                 if(mf[0] == 'oThicken'):
                     print('float ThTh_' + str(gcount) + ' = ' + str(mf[2]) + ';')
@@ -346,9 +346,9 @@ opt = json_dict['operator_tree']
 
 for op in  opt:
     #print('----',len(opt),'  ',opt)
-    hierarchy2(op)
+    if  isinstance(op, list):
+        hierarchy2(op)
 print('//----------------------------------------------------------------')
-
 
 
 
