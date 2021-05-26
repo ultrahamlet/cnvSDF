@@ -48,10 +48,10 @@ def hierarchy(mf):
                     gcount += 1
                 if prHead == 'pCylinder':
                     val = str(float(prVal))
-                    prm.append('float ToRa_' + str(gcount) + ' = ' + val + ';')
+                    prm.append('float CyRa_' + str(gcount) + ' = ' + val + ';')
                     gcount += 1
                     val  = str(float(prim[mf[1]][2]))
-                    prm.append('float TOra_' + str(gcount) + ' = ' + val + ';')
+                    prm.append('float CyHe_' + str(gcount) + ' = ' + val + ';')
                     gcount += 1
                 if prHead == 'pTorus':
                     val = str(float(prVal))
