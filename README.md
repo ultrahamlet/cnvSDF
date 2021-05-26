@@ -19,7 +19,7 @@ and **Operators**
   
   Union, Subtraction, Interection, Onion, Thicken, SmoothUnion, SmoothSubtraction, SumoothIntersection  
     
-***How to use?***
+***How it works?***
   
    ***1.*** Model SDF objects with "SDF Editor".  
    
