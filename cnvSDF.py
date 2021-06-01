@@ -65,8 +65,13 @@ def hierarchy(mf):
                    prm.append('float SpRa_' + str(gcount) + ' = ' + val + ';')
                    gcount += 1
                 if prHead == 'pCone':
-                    val = str(float(prVal))
-                    prm.append('vec2 CoGe_' + str(gcount)  + ' = vec2(' + val + ' ,' + val +');')
+
+                    #val = str(float(prVal))
+                    fval = float(np.radians(prVal))
+                    si = np.sin(fval)
+                    co = np.cos(fval)
+                    #prm.append('vec2 CoGe_' + str(gcount)  + ' = vec2(' + val + ' ,' + val +');')
+                    prm.append('vec2 CoGe_' + str(gcount)  + '= vec2(' + str(si) + ' ,' + str(co) +');')
                     gcount += 1
                     val = str(float(prim[mf[1]][2]))
                     prm.append('float CoHe_' + str(gcount) + ' = ' + val + ';')
@@ -257,20 +262,7 @@ def hierarchy(mf):
                 v0 = -float(u[0])
                 v1 = -float(u[1])
                 v2 = -float(u[2])
-                
-                
-                #rotvec = np.array([np.radians(v0), np.radians(v1), np.radians(v2)])
-                #euler = np.array([np.radians(v0), np.radians(v1), np.radians(v2)])
-                #rotvec = Rotation.from_euler('XYZ', euler, degrees=True)
-                #rotvec = np.e([np.radians(v0), np.radians(v1), np.radians(v2)])
-
-                #if v1 == 90. and v2 == 90.:
-                #     rotvec = np.array([0.0, 0.0, 1.0])
-
-                #print('---------------- ', v0,v1,v2)
-                #rot = Rotation.from_rotvec(rotvec)
                 rot = rotate_xyz(v0,v1,v2)
-                
                 e = np.linalg.inv(rot) #inverse matrix
                 # for output mat3
                 strm = str(e)
@@ -291,7 +283,6 @@ def hierarchy(mf):
             for mem in mf:
                 if isinstance(mem, list):
                     for mm in mem:
-                        #print('---> ',mm,len(mm))
                         hierarchy(mm)
             return
     else:
@@ -300,7 +291,6 @@ def hierarchy(mf):
 # analyze operator_tree
 def hierarchy2(mf):
     global gcount
-    #if len(mf) > 1:
     if isinstance(mf, list):
         if not isinstance(mf[0], list): # mf[0] is Operator
                 #print('===',mf)
@@ -313,19 +303,16 @@ def hierarchy2(mf):
                 if(mf[0] == 'oSmoothSubtraction'):
                     print('float SmTr_' + str(gcount) + ' = ' + str(mf[2]) + ';')
                     gcount += 1
-                #if(mf[0] == 'oSubtraction'):
                 if(mf[0] == 'oOnion'):
                     print('float OnTh_' + str(gcount) + ' = ' + str(mf[2]) + ';')
-                #    print('float SpRa_' + str(gcount) + ' = ' + str(mf[2]) + ';')
-                #    gcount += 1
                     gcount += 1
                 if(mf[0] == 'oSmoothIntersection'):
                     print('float SmTr_' + str(gcount) + ' = ' + str(mf[2]) + ';')
                     gcount += 1
-
-        for mem in mf:
-            if isinstance(mem, list):
-                hierarchy2(mem)
+        else:   # mf[0] is not Operator
+            for mem in mf:
+                if isinstance(mem, list):
+                    hierarchy2(mem)
 
 global gcount
 global pcount
